@@ -33,5 +33,19 @@ namespace puertas.Controllers
             return Ok(product.AsDto());
             //return product; aceitavel tbm
         }
+
+        //POST /product
+        [HttpPost]
+        public ActionResult<ProductDto> CreateProduct(CreateProductDto productDto){
+            Product product = new(){
+                Id = Guid.NewGuid(),
+                Name = productDto.Name,
+                Price = productDto.Price,
+                Description = productDto.Description,
+                CreatedAt = DateTimeOffset.UtcNow
+            };
+            repository.CreateProduct(product);
+            return CreatedAtAction(nameof(GetProduct), new { id = product.Id}, product.AsDto());
+        }
     }
 }

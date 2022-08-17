@@ -8,5 +8,6 @@ namespace puertas.Repositories
     {
         Product GetProduct(Guid Id);
         IEnumerable<Product> GetProducts();
+        void CreateProduct(Product product);
     }
 }

@@ -20,5 +20,9 @@ namespace puertas.Repositories
             return products.Where(product => product.Id == Id).SingleOrDefault();
         }
 
+        public void CreateProduct(Product product)
+        {
+            products.Add(product);
+        }
     }
 }
