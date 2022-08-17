@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using puertas.Repositories;
 using puertas.Models;
+using puertas.Dtos;
 
 namespace puertas.Controllers
 {   
@@ -8,28 +9,28 @@ namespace puertas.Controllers
     [Route("products")]
     //[Route("[controller]")]
     public class ProductsController : ControllerBase{
-        private readonly ProductsRepository repository;
+        private readonly IProductsRepository repository;
 
-        public ProductsController(){
-            repository = new ProductsRepository();
+        public ProductsController(IProductsRepository repository){
+            this.repository = repository;
         }
 
         //GET /products
         [HttpGet]
-        public IEnumerable<Product> GetProducts(){
-            var products = repository.GetProducts();
+        public IEnumerable<ProductDto> GetProducts(){
+            var products = repository.GetProducts().Select(product => product.AsDto());
             return products;
         }
 
         //GET /product/{id}
         [HttpGet("{id}")]
-        public ActionResult<Product> GetProduct(Guid id){
+        public ActionResult<ProductDto> GetProduct(Guid id){
             //ActionResult permite retornar o objeto encontrado ou o status
             var product = repository.GetProduct(id);
             if (product is null){
                 return NotFound();
             }
-            return Ok(product);
+            return Ok(product.AsDto());
             //return product; aceitavel tbm
         }
     }

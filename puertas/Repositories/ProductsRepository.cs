@@ -1,7 +1,7 @@
 using puertas.Models;
 namespace puertas.Repositories
 {
-    public class ProductsRepository
+    public class ProductsRepository : IProductsRepository
     {
         private readonly List<Product> products = new()
         {
@@ -15,7 +15,8 @@ namespace puertas.Repositories
             return products;
         }
 
-        public Product GetProduct(Guid Id){
+        public Product GetProduct(Guid Id)
+        {
             return products.Where(product => product.Id == Id).SingleOrDefault();
         }
 
