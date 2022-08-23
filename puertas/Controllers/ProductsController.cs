@@ -47,5 +47,16 @@ namespace puertas.Controllers
             repository.CreateProduct(product);
             return CreatedAtAction(nameof(GetProduct), new { id = product.Id}, product.AsDto());
         }
+
+        //DELETE /product/{id}
+        [HttpDelete]
+        public ActionResult DeleteProcuct(Guid id){
+            if(repository.DeleteProduct(id)){
+                return Ok();
+            }
+            else{
+              return NotFound("product not found");  
+            }
+        }
     }
 }

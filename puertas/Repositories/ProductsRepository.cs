@@ -24,5 +24,14 @@ namespace puertas.Repositories
         {
             products.Add(product);
         }
+
+        public bool DeleteProduct(Guid Id){
+            Product prod = products.Where(product => product.Id == Id).SingleOrDefault();
+            if (prod is not null){
+                products.Remove(prod);
+                return true;
+            }
+            return false;
+        }
     }
 }
