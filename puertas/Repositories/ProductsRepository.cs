@@ -33,5 +33,10 @@ namespace puertas.Repositories
             }
             return false;
         }
+
+         public void UpdateProduct(Product product){
+            var index = products.FindIndex(ex_item => ex_item.Id == product.Id);
+            products[index] = product;
+        }
     }
 }

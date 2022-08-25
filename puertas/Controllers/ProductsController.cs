@@ -58,5 +58,23 @@ namespace puertas.Controllers
               return NotFound("product not found");  
             }
         }
+
+        //PUT /product/{id}
+        [HttpPut("{id}")]
+        public ActionResult<ProductDto> UpdateProduct(Guid id, UpdateProductDto productDto){
+            //ActionResult permite retornar o objeto encontrado ou o status
+            var product = repository.GetProduct(id);
+            if (product is null){
+                return NotFound();
+            }
+            Product updateProduct = product with {
+                Name = productDto.Name,
+                Description = productDto.Description,
+                Price = productDto.Price
+            };
+            repository.UpdateProduct(updateProduct);
+            return Ok();
+            //return product; aceitavel tbm
+        }
     }
 }

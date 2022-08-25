@@ -10,5 +10,6 @@ namespace puertas.Repositories
         IEnumerable<Product> GetProducts();
         void CreateProduct(Product product);
         bool DeleteProduct(Guid Id);
+        void UpdateProduct(Product product);
     }
 }
