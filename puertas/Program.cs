@@ -1,10 +1,18 @@
 using puertas.Repositories;
+using puertas.Settings;
+using MongoDB.Driver;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
-//so criar 1 instancia durante td a execucao
+builder.Services.AddSingleton<IMongoClient>(serviceProvider => {
+    var settings = builder.Configuration.GetSection(nameof(MongoDbSettings)).Get<MongoDbSettings>();
+    return new MongoClient(settings.connectionString);
+});
+
+//so criar 1 instancia durante td a execucao quando usa singleton
 builder.Services.AddSingleton<IProductsRepository, ProductsRepository>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
