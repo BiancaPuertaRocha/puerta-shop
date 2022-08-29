@@ -4,13 +4,13 @@ using MongoDB.Driver;
 namespace puertas.Repositories{
     //to run a mongo docker container
     //docker run -d --rm --name mongo -p 23017:27017 -v mongodbdata:/data/db mongo
-    public class MongoDBProductsRepository : IProductsRepository
+    public class MongoDbProductsRepository : IProductsRepository
     {
         private const string databaseName = "puertas";
-        private const string collectionName = "product";
+        private const string collectionName = "products";
         private readonly IMongoCollection<Product> productsCollection;
 
-        public MongoDBProductsRepository(IMongoClient mongoclient){
+        public MongoDbProductsRepository(IMongoClient mongoclient){
             IMongoDatabase database = mongoclient.GetDatabase(databaseName);
             productsCollection = database.GetCollection<Product>(collectionName);
         }
@@ -22,7 +22,7 @@ namespace puertas.Repositories{
 
         public bool DeleteProduct(Guid Id)
         {
-            productsCollection.DeleteOne()
+            throw new NotImplementedException();
         }
 
         public Product GetProduct(Guid Id)
