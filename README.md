@@ -1,5 +1,5 @@
 # puerta-shop
-Rest API C# whith a MongoDB database to be used by a mobile app that will be developed soon
+Rest API C# with a MongoDB database to be used by a mobile app that will be developed soon
 
 ## Escopo
 O Puerta Shop é um aplicativo movel que permite o gerenciamento de uma loja de calçados. Nele, é possivel cadastrar os itens que serão vendidos para que vendas possam ser registradas. 
