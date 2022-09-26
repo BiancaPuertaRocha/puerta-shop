@@ -1,0 +1,17 @@
+trigger:
+  - main
+pool:
+  vmImage: ubuntu-latest
+variables:
+  buildConfiguration: Release
+steps:
+  - task: DotNetCoreCLI@2
+    displayName: 'dotnet publish --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+    inputs:
+      command: publish
+      publishWebProjects: false
+      projects: 'puertas/puertas.csproj'
+      arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+      zipAfterPublish: true
+  - task: PublishBuildArtifacts@1
+    displayName: 'publish artifacts'
